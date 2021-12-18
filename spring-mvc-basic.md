@@ -48,3 +48,13 @@ hello.springmvc.basic.requestmapping.MappingController
 - 다양한 요청 매핑 확인 
 
   
+
+### MultiValueMap
+
+- 맵과 유사한데 하나의 키에 여러 값을 받을 수 있다 
+
+- HTTP header, HTTP 쿼리 파라미터와 같이 하나의 키에 여러 값을 받을 때 사용한다 
+
+- key1=value1&key2=value2
+
+  
