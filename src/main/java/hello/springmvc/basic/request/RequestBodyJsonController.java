@@ -36,14 +36,14 @@ public class RequestBodyJsonController {
 
     @ResponseBody
     @PostMapping("/request-body-json-v2")
-    public void requestBodyJsonV2(@RequestBody String messageBody) throws IOException {
+    public String requestBodyJsonV2(@RequestBody String messageBody) throws IOException {
 
 
         log.info("messageBody={}", messageBody);
         HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);
         log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
 
-        return "ok"
+        return "ok";
     }
 
     @ResponseBody
@@ -63,8 +63,8 @@ public class RequestBodyJsonController {
 
     @ResponseBody
     @PostMapping("/request-body-json-v5")
-    public String requestBodyJsonV4(@RequestBody HelloData helloData) {
+    public HelloData requestBodyJsonV5(@RequestBody HelloData helloData) {
         log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
-        return data;
+        return helloData;
     }
 }

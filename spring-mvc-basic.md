@@ -140,3 +140,34 @@ hello.springmvc.basic.requestmapping.MappingController
 - 따라서 @RequestBody  생략시 @ModelAttribure 적용
 
   
+
+## HTTP 응답 - 정적 리소스, 뷰 템플릿
+
+- 정적 리소스
+
+- 뷰 템플릿
+
+- HTTP 메시지 
+
+  
+
+### 뷰 템플릿
+
+```java
+@RestController
+public class ResponseViewController {
+    @RequestMapping("/response-view-v1")
+    public ModelAndView responseViewV1() {
+        ModelAndView mav = new ModelAndView("response/hello")
+                .addObject("data", "hello!");
+        return mav;
+    }
+
+    @RequestMapping("/response-view-v2")
+    public String responseViewV2(Model model) {
+        model.addAttribute("data", "hello2");
+        return "response/hello";
+    }
+}
+```
+
