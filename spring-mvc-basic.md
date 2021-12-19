@@ -57,4 +57,86 @@ hello.springmvc.basic.requestmapping.MappingController
 
 - key1=value1&key2=value2
 
+
+
+
+
+
+### 주의
+
+#### 파라미터 이름만 사용
+
+`request-param?username=`
+
+- 파라미터 이름만 있고 값이 없는 경우  -> 	빈 문자로 통과
+
+#### 기본형에 null 입력
+
+`request-param` 요청
+
+```java
+    @ResponseBody
+    @RequestMapping("/request-param-required")
+    public String requestParamRequired(
+            @RequestParam(required = true) String username,
+            @RequestParam(required = false) Integer age
+    ) {
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+```
+
+
+
+### 디폴트 설정
+
+- required 필요 없음
+- 빈문자 경우에도 디폴트 값으로 적용된다
+
+```java
+    @ResponseBody
+    @RequestMapping("/request-param-default")
+    public String requestParamDefault(
+            @RequestParam(required = true, defaultValue = "guest") String username,
+            @RequestParam(required = false, defaultValue = "-1") Integer age
+    ) {
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+```
+
+
+
+### HTTP 요청 파라미터 @ModelAttribute
+
+```java
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+        log.info("helloData={}", helloData);
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(HelloData helloData) {
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+        log.info("helloData={}", helloData);
+        return "ok";
+    }
+```
+
+
+
+### @RequestBody 는 생략 불가능
+
+- 스프링은 @ModelAttribute, @RequestParam 해당 생략시 다음과 같은 규칙을 적용한다 
+
+- String, int, Integer = @RequestParam
+
+- 나머지 @ModelAttribute 
+
+- 따라서 @RequestBody  생략시 @ModelAttribure 적용
+
   
