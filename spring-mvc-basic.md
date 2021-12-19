@@ -171,3 +171,29 @@ public class ResponseViewController {
 }
 ```
 
+
+
+### HTTP 응답 HTTP API 메시지 바디에 직접 입력
+
+#### JSON
+
+```java
+    @GetMapping("/response-body-json-v1")
+    public ResponseEntity<HelloData> responseBodyJsonV1() {
+        HelloData helloData = new HelloData();
+        helloData.setUsername("userA");
+        helloData.setAge(27);
+        return new ResponseEntity<>(helloData, HttpStatus.OK);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @GetMapping("/response-body-json-v2")
+    public HelloData responseBodyJsonV2() {
+        HelloData helloData = new HelloData();
+        helloData.setUsername("userA");
+        helloData.setAge(27);
+        return HelloData
+    }
+```
+
